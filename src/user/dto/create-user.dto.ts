@@ -12,12 +12,10 @@ import {
 
 export class CreateUserDto {
   @ApiProperty({ example: faker.internet.email() })
-  @IsOptional()
   @IsEmail()
   email: string;
 
   @ApiProperty({ example: 'Password12' })
-  @IsOptional()
   @IsString()
   @MinLength(4, { message: 'Password must be at least 4 characters' })
   @MaxLength(12, { message: 'Password to long' })
@@ -39,14 +37,12 @@ export class CreateUserDto {
   contactPerson: string;
 
   @ApiProperty({ example: faker.phone.number('+628#######') })
-  @IsOptional()
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })
   phoneOne: string;
 
   @ApiProperty({ example: faker.phone.number('+628#######') })
-  @IsOptional()
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })

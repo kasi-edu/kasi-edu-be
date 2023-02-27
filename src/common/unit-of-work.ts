@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-
-// import { User } from 'src/user/entities/user.entity';
-// import { UserRepo } from 'src/user/user.repository';
+import { User } from 'src/user/entities/user.entity';
+import { UserRepo } from 'src/user/user.repository';
 
 import { EntityManager, QueryRunner, Repository, Connection } from 'typeorm';
 
@@ -10,7 +9,7 @@ export class UnitOfWork {
   private transactionManager: EntityManager;
   public connection: Connection;
 
-  // public userRepo: UserRepo;
+  public userRepo: UserRepo;
 
   constructor(
     private readonly queryRunner: QueryRunner,
@@ -19,10 +18,10 @@ export class UnitOfWork {
     this.transactionManager = this.queryRunner.manager;
 
     // * add every repo in here
-    // this.userRepo = new UserRepo(
-    //   this.transactionManager.getRepository(User),
-    //   connection,
-    // );
+    this.userRepo = new UserRepo(
+      this.transactionManager.getRepository(User),
+      connection,
+    );
   }
 
   async start(): Promise<void> {

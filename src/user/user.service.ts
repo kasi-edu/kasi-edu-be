@@ -1,26 +1,93 @@
 import { Injectable } from '@nestjs/common';
+import { HandleMySqlError } from 'src/common/helpers/handleMySqlError';
+import { UnitOfWorkFactory } from 'src/common/unit-of-work-factory';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRepo } from './user.repository';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  private unitOfWorkFactory: UnitOfWorkFactory;
+
+  constructor(
+    private EntityManager: UnitOfWorkFactory,
+    private repo: UserRepo,
+    public handleMySqlError: HandleMySqlError,
+  ) {
+    this.unitOfWorkFactory = EntityManager;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async create(createUserDto: CreateUserDto) {
+    try {
+      const user = await this.repo.createInstance({
+        ...createUserDto,
+      });
+      await this.repo.save(user);
+
+      return {
+        message: 'success create a new user',
+        data: createUserDto,
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findAll() {
+    try {
+      const users = await this.repo.findAll();
+      return {
+        message: 'OK',
+        data: users,
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findOne(condition) {
+    try {
+      return {
+        message: 'OK',
+        data: await this.repo.findOne(condition),
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findOneById(id: number) {
+    try {
+      return {
+        message: 'OK',
+        data: await this.repo.findOne({ id }),
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      await this.repo.update(id, updateUserDto);
+      return {
+        message: 'OK',
+        data: updateUserDto,
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
+  }
+
+  async remove(id: number) {
+    try {
+      await this.repo.remove({ id });
+      return {
+        message: 'OK',
+        data: null,
+      };
+    } catch (error) {
+      this.handleMySqlError.throwError(error);
+    }
   }
 }
