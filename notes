@@ -1,0 +1,9 @@
+- email
+- password
+- type -> vocation | csr | user / student
+- address
+- category -> harusnya ini enum
+- description
+- contact person
+- phone 1
+- phone 2
