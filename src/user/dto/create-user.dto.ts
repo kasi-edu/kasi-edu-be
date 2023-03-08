@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-// import { faker } from '@faker-js/faker';
-import faker from 'faker';
+import { randEmail, randPhoneNumber } from '@ngneat/falso';
 import {
   IsEmail,
   IsOptional,
@@ -12,7 +11,7 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @ApiProperty({ example: faker.internet.email() })
+  @ApiProperty({ example: randEmail({ length: 10 }) })
   @IsEmail()
   email: string;
 
@@ -37,13 +36,13 @@ export class CreateUserDto {
   @IsString()
   contactPerson: string;
 
-  @ApiProperty({ example: faker.phone.number('+628#######') })
+  @ApiProperty({ example: randPhoneNumber({ length: 10 }) })
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })
   phoneOne: string;
 
-  @ApiProperty({ example: faker.phone.number('+628#######') })
+  @ApiProperty({ example: randPhoneNumber({ length: 10 }) })
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })

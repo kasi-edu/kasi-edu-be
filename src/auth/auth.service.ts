@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as argon2 from 'argon2';
+import bcryptjs from 'bcryptjs';
 
 import { HandleError } from 'src/common/helpers/handleError';
 import { UserService } from 'src/user/user.service';
@@ -15,7 +15,8 @@ export class AuthService {
   ) {}
 
   hashData(data: string) {
-    return argon2.hash(data);
+    // return argon2.hash(data);
+    return bcryptjs.hash(data, 8);
   }
 
   async signIn(data: LoginDto) {
@@ -33,10 +34,13 @@ export class AuthService {
         throw new BadRequestException('Account not verified');
       }
 
-      const passwordMatches = await argon2.verify(
-        userDetails.password,
-        inputPassword,
-      );
+      // const passwordMatches = await argon2.verify(
+      //   userDetails.password,
+      //   inputPassword,
+      // );
+      const hash = await bcryptjs.hash(inputPassword, 8);
+      const passwordMatches = bcryptjs.compare(userDetails.password, hash);
+
       if (!passwordMatches) {
         throw new BadRequestException('Password is incorrect');
       }

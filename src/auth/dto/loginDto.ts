@@ -1,10 +1,9 @@
-// import { faker } from '@faker-js/faker';
-import faker from 'faker';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { randEmail } from '@ngneat/falso';
 
 export class LoginDto {
-  @ApiProperty({ example: faker.internet.email() })
+  @ApiProperty({ example: randEmail({ length: 10 }) })
   @IsNotEmpty()
   @IsEmail()
   @IsString()
