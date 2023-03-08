@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
+import faker from 'faker';
 import {
   IsEmail,
   IsOptional,

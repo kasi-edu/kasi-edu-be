@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { HandleMySqlError } from './helpers/handleMySqlError';
+import { HandleError } from './helpers/handleError';
 
 @Injectable()
 export abstract class AbstractService {
-  public handleMySqlError: HandleMySqlError;
+  public handleError: HandleError;
 
   constructor(private repo, private serviceName) {
-    this.handleMySqlError = new HandleMySqlError();
+    this.handleError = new HandleError();
   }
 
   async upsert(data, target) {
@@ -17,17 +17,14 @@ export abstract class AbstractService {
         ...(existingData !== null && { id: existingData.id }),
         ...data,
       });
-      console.log(
-        '🚀 ~ file: abstract.service.ts:20 ~ AbstractService ~ upsert ~ dataInstance:',
-        dataInstance,
-      );
+
       await this.repo.save(dataInstance);
       return {
         message: `success create a new ${this.serviceName}`,
         data: existingData,
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
@@ -43,40 +40,29 @@ export abstract class AbstractService {
         data: createDto,
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
-  async findAll() {
+  async findAll({ conditions = {}, relations = {} }) {
     try {
       return {
         message: 'OK',
-        data: await this.repo.findAll(),
+        data: await this.repo.findAll({ conditions, relations }),
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
-  async findOne(condition) {
+  async findOne({ conditions = {}, relations = {} }) {
     try {
       return {
         message: 'OK',
-        data: await this.repo.findOne(condition),
+        data: await this.repo.findOne({ conditions, relations }),
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
-    }
-  }
-
-  async findOneById(id: number) {
-    try {
-      return {
-        message: 'OK',
-        data: await this.repo.findOne({ id }),
-      };
-    } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
@@ -88,7 +74,7 @@ export abstract class AbstractService {
         data: updateDto,
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
@@ -100,7 +86,7 @@ export abstract class AbstractService {
         data: null,
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 }

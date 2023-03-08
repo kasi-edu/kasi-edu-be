@@ -7,3 +7,6 @@
 - contact person
 - phone 1
 - phone 2
+
+dashboard: https://app.serverless.com/pisanggoreng/apps/kasi-edu/kasi-edu/dev/ap-southeast-1
+endpoint: ANY - https://lbd0e06d2c.execute-api.ap-southeast-1.amazonaws.com/dev/{proxy+}

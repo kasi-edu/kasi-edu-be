@@ -1,32 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { Connection, Repository } from 'typeorm';
-import { HandleMySqlError } from './helpers/handleMySqlError';
+import { HandleError } from './helpers/handleError';
 
 @Injectable()
 export abstract class AbstractRepository {
   connectionDb: any;
-  handleMySqlError: HandleMySqlError;
+  handleError: HandleError;
 
   constructor(
     protected readonly repo: Repository<any>,
     connection: Connection,
   ) {
     this.connectionDb = connection.createQueryRunner();
-    this.handleMySqlError = new HandleMySqlError();
+    this.handleError = new HandleError();
   }
 
-  createInstance(instanceDetails) {
-    return this.repo.create(instanceDetails);
+  async createInstance(instanceDetails) {
+    return await this.repo.create(instanceDetails);
   }
 
-  async findAll(condition = {}) {
+  async findAll({ conditions = {}, relations = {} }) {
     return this.repo.find({
-      where: condition ? condition : undefined,
+      where: conditions ? conditions : undefined,
+      relations: relations ? relations : undefined,
     });
   }
 
-  async findOne(condition) {
-    return await this.repo.findOne({ where: condition });
+  async findOne({ conditions = {}, relations = {} }) {
+    return await this.repo.findOne({
+      where: conditions ? conditions : undefined,
+      relations: relations ? relations : undefined,
+    });
   }
 
   async update(id, instance) {

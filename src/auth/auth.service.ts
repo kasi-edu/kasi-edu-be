@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 
-import { HandleMySqlError } from 'src/common/helpers/handleMySqlError';
+import { HandleError } from 'src/common/helpers/handleError';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/loginDto';
 
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-    public handleMySqlError: HandleMySqlError,
+    public handleError: HandleError,
   ) {}
 
   hashData(data: string) {
@@ -22,7 +22,9 @@ export class AuthService {
     try {
       const { email, password: inputPassword } = data;
 
-      const { data: userDetails } = await this.userService.findOne({ email });
+      const { data: userDetails } = await this.userService.findOne({
+        conditions: { email },
+      });
       if (!userDetails) {
         throw new BadRequestException('Email does not exist');
       }
@@ -44,7 +46,7 @@ export class AuthService {
         data: await this.updateToken(userDetails),
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 
@@ -52,7 +54,7 @@ export class AuthService {
     try {
       const { email, password, dob } = createUserDto;
       const { data: existingUserDetails } = await this.userService.findOne({
-        email,
+        conditions: { email },
       });
 
       if (!existingUserDetails) {
@@ -74,7 +76,7 @@ export class AuthService {
         data: createUserDto,
       };
     } catch (error) {
-      this.handleMySqlError.throwError(error);
+      this.handleError.throwError(error);
     }
   }
 

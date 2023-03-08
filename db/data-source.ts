@@ -13,6 +13,12 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   migrations: ['dist/**/migrations/*.{js,ts}'],
   synchronize: true,
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 };
 
 const dataSource = new DataSource(dataSourceOptions);

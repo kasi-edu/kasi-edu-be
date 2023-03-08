@@ -1,0 +1,27 @@
+org: pisanggoreng
+app: kasi-edu
+service: kasi-edu
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-jetpack
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+  stage: dev
+  profile: endy-santoso
+
+functions:
+  api:
+    handler: dist/src/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
