@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import bcryptjs from 'bcryptjs';
+import * as bcrypt from 'bcrypt';
 
 import { HandleError } from 'src/common/helpers/handleError';
 import { UserService } from 'src/user/user.service';
@@ -15,8 +15,7 @@ export class AuthService {
   ) {}
 
   hashData(data: string) {
-    // return argon2.hash(data);
-    return bcryptjs.hash(data, 8);
+    return bcrypt.hash(data, 8);
   }
 
   async signIn(data: LoginDto) {
@@ -34,12 +33,8 @@ export class AuthService {
         throw new BadRequestException('Account not verified');
       }
 
-      // const passwordMatches = await argon2.verify(
-      //   userDetails.password,
-      //   inputPassword,
-      // );
-      const hash = await bcryptjs.hash(inputPassword, 8);
-      const passwordMatches = bcryptjs.compare(userDetails.password, hash);
+      const hash = await bcrypt.hash(inputPassword, 8);
+      const passwordMatches = bcrypt.compare(userDetails.password, hash);
 
       if (!passwordMatches) {
         throw new BadRequestException('Password is incorrect');
@@ -56,21 +51,16 @@ export class AuthService {
 
   async signUp(createUserDto): Promise<any> {
     try {
-      const { email, password, dob } = createUserDto;
+      const { email, password } = createUserDto;
       const { data: existingUserDetails } = await this.userService.findOne({
         conditions: { email },
       });
 
-      if (!existingUserDetails) {
-        throw new BadRequestException('Email not registered');
+      if (existingUserDetails) {
+        throw new BadRequestException('Email is registered');
       }
 
-      // await this.userService.upsert(
-      //   { ...createUserDto, email, otp: 12345, otp_expired: new Date() },
-      //   { email, employeeId, phone },
-      // );
-
-      await this.userService.update(existingUserDetails.id, {
+      await this.userService.create({
         ...createUserDto,
         password: await this.hashData(password),
       });
@@ -95,9 +85,9 @@ export class AuthService {
 
   async updateRefreshToken(userId: number, refreshToken: string) {
     const hashedRefreshToken = await this.hashData(refreshToken);
-    // await this.userService.update(userId, {
-    //   refreshToken: hashedRefreshToken,
-    // });
+    await this.userService.update(userId, {
+      refreshToken: hashedRefreshToken,
+    });
   }
 
   async getTokens(userDetails) {

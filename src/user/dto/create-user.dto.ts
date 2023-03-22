@@ -1,8 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { randEmail, randPhoneNumber } from '@ngneat/falso';
+import {
+  randEmail,
+  randFirstName,
+  randFullAddress,
+  randPhoneNumber,
+} from '@ngneat/falso';
 import {
   IsEmail,
-  IsOptional,
   IsPhoneNumber,
   IsString,
   Matches,
@@ -24,15 +28,23 @@ export class CreateUserDto {
   })
   password: string;
 
+  @ApiProperty({ example: 'vocation' })
   @IsString()
   type: string;
 
+  @ApiProperty({ example: randFullAddress() })
   @IsString()
   address: string;
 
+  @ApiProperty({ example: 'kami vokasi yang bergerak dibidang otomotif' })
   @IsString()
-  description: string;
+  description?: string;
 
+  @ApiProperty({ example: 'otomotif' })
+  @IsString()
+  category?: string;
+
+  @ApiProperty({ example: randFirstName() })
   @IsString()
   contactPerson: string;
 
@@ -46,5 +58,5 @@ export class CreateUserDto {
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })
-  phoneTwo: string;
+  phoneTwo?: string;
 }

@@ -14,11 +14,11 @@ export class User {
   id: number;
 
   @ApiProperty()
-  @Column({ unique: true, nullable: true })
+  @Column({ unique: true, nullable: false })
   email: string;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   @Exclude()
   password: string;
 
@@ -32,6 +32,10 @@ export class User {
 
   @ApiProperty()
   @Column({ nullable: true })
+  category: string;
+
+  @ApiProperty()
+  @Column({ nullable: false })
   address: string;
 
   @ApiProperty()
@@ -39,16 +43,20 @@ export class User {
   description: string;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   contactPerson: string;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   phoneOne: string;
 
   @ApiProperty()
   @Column({ nullable: true })
   phoneTwo: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  refreshToken: string;
 
   @CreateDateColumn()
   createdAt: Date;
