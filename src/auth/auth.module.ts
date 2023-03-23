@@ -7,6 +7,9 @@ import { UserModule } from 'src/user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { HandleError } from 'src/common/helpers/handleError';
+import { AccessTokenStrategy } from './strategies/accessToken.strategy';
+import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
+import { SessionSerializer } from './serializer/session.serializer';
 
 @Module({
   imports: [
@@ -17,11 +20,18 @@ import { HandleError } from 'src/common/helpers/handleError';
       secret: 'SECRET',
       signOptions: { expiresIn: '7d' },
     }),
+    PassportModule.register({ session: true }), // * for session
     PassportModule,
     UserModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, HandleError],
+  providers: [
+    AuthService,
+    AccessTokenStrategy,
+    RefreshTokenStrategy,
+    SessionSerializer,
+    HandleError,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}
