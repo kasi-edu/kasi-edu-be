@@ -22,7 +22,7 @@
         "DB_PASSWORD": "wMrqSs35UigX",
         "SECRET": "diam_berdebu_bergerak_naik_gunung",
         "SECRET_REFRESH": "diam_berdebu_bergerak_kita_camping",
-        "TOKEN_EXP": "15m",
+        "TOKEN_EXP": "7d",
         "TOKEN_REFRESH_EXP": "7d"
       },
       "compiledCloudFormationTemplate": {
@@ -235,7 +235,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/kasi-edu/dev/1678290603924-2023-03-08T15:50:03.924Z/kasi-edu.zip"
+                "S3Key": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z/kasi-edu.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "nodejs14.x",
@@ -254,7 +254,7 @@
                   "DB_PASSWORD": "wMrqSs35UigX",
                   "SECRET": "diam_berdebu_bergerak_naik_gunung",
                   "SECRET_REFRESH": "diam_berdebu_bergerak_kita_camping",
-                  "TOKEN_EXP": "15m",
+                  "TOKEN_EXP": "7d",
                   "TOKEN_REFRESH_EXP": "7d"
                 }
               },
@@ -269,14 +269,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionCw5emetnCtDE8iLNbVb0rmrXBnHvTRmUDV6Q8JDMk7k": {
+          "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "LjIvRwkj6izqd+MGTU9bSGAKM+aJ3FbtWAYpkXQ6DI0="
+              "CodeSha256": "trrIQtYq1qZxVKU76s/it/2EjginMlVj8MxJdXqCqm8="
             }
           },
           "ApiGatewayRestApi": {
@@ -352,7 +352,7 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1678290572590": {
+          "ApiGatewayDeployment1679539173197": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -510,7 +510,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/kasi-edu/dev/1678290603924-2023-03-08T15:50:03.924Z/custom-resources.zip"
+                "S3Key": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z/custom-resources.zip"
               },
               "FunctionName": "kasi-edu-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -572,7 +572,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionCw5emetnCtDE8iLNbVb0rmrXBnHvTRmUDV6Q8JDMk7k"
+              "Ref": "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w"
             },
             "Export": {
               "Name": "sls-kasi-edu-dev-ApiLambdaFunctionQualifiedArn"
@@ -719,7 +719,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionCw5emetnCtDE8iLNbVb0rmrXBnHvTRmUDV6Q8JDMk7k"
+        "versionLogicalId": "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w"
       }
     },
     "configValidationMode": "warn",
@@ -749,7 +749,7 @@
     "appUid": "jzl0Wg5n6VnBZhJwtY"
   },
   "package": {
-    "artifactDirectoryName": "serverless/kasi-edu/dev/1678290603924-2023-03-08T15:50:03.924Z",
+    "artifactDirectoryName": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z",
     "artifact": "kasi-edu.zip"
   }
 }
