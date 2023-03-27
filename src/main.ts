@@ -25,10 +25,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(
     app,
     new DocumentBuilder()
-      .setTitle('Abhi Cash API')
-      .setDescription('Abhi cash for fintech')
+      .setTitle('Kasi Edu API')
+      .setDescription('API for Kasi edu dashboard')
       .setVersion('v1')
-      .addTag('abhiCash')
+      .addTag('kasiEdu')
       .addBearerAuth(
         { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
         'access-token',
