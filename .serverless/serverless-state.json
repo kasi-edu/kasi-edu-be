@@ -235,7 +235,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z/kasi-edu.zip"
+                "S3Key": "serverless/kasi-edu/dev/1679540227227-2023-03-23T02:57:07.227Z/kasi-edu.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "nodejs14.x",
@@ -269,14 +269,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w": {
+          "ApiLambdaVersionV8G1gHaZP8Ewo6DuIQzpy8KtSyrgyPF81leUnp7qI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "trrIQtYq1qZxVKU76s/it/2EjginMlVj8MxJdXqCqm8="
+              "CodeSha256": "Ls2+waFjJBCgf7MaApktpp19eNpMQPPjjpAqaLFixv8="
             }
           },
           "ApiGatewayRestApi": {
@@ -352,7 +352,7 @@
               "ApiLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1679539173197": {
+          "ApiGatewayDeployment1679540198269": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -510,7 +510,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z/custom-resources.zip"
+                "S3Key": "serverless/kasi-edu/dev/1679540227227-2023-03-23T02:57:07.227Z/custom-resources.zip"
               },
               "FunctionName": "kasi-edu-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -572,7 +572,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w"
+              "Ref": "ApiLambdaVersionV8G1gHaZP8Ewo6DuIQzpy8KtSyrgyPF81leUnp7qI"
             },
             "Export": {
               "Name": "sls-kasi-edu-dev-ApiLambdaFunctionQualifiedArn"
@@ -719,7 +719,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionyoqUDE1c4aXRWV0R2v0TStI1CyKlM0sVa5L0Uj0w"
+        "versionLogicalId": "ApiLambdaVersionV8G1gHaZP8Ewo6DuIQzpy8KtSyrgyPF81leUnp7qI"
       }
     },
     "configValidationMode": "warn",
@@ -749,7 +749,7 @@
     "appUid": "jzl0Wg5n6VnBZhJwtY"
   },
   "package": {
-    "artifactDirectoryName": "serverless/kasi-edu/dev/1679539202389-2023-03-23T02:40:02.389Z",
+    "artifactDirectoryName": "serverless/kasi-edu/dev/1679540227227-2023-03-23T02:57:07.227Z",
     "artifact": "kasi-edu.zip"
   }
 }

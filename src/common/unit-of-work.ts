@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CategoryRepo } from 'src/category/category.repository';
 import { User } from 'src/user/entities/user.entity';
 import { UserRepo } from 'src/user/user.repository';
 
@@ -10,6 +11,7 @@ export class UnitOfWork {
   public connection: Connection;
 
   public userRepo: UserRepo;
+  public categoryRepo: CategoryRepo;
 
   constructor(
     private readonly queryRunner: QueryRunner,

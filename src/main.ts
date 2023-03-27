@@ -3,8 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
-import serverlessExpress from '@vendia/serverless-express';
-import { Callback, Context, Handler } from 'aws-lambda';
 
 import { AppModule } from './app.module';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
@@ -37,7 +35,7 @@ async function bootstrap() {
       )
       .build(),
   );
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
 
   const configService = app.get(ConfigService);
   const APP_PORT = configService.get<number>('APP_PORT');
