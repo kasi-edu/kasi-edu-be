@@ -10,6 +10,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
+    "start:local": "cross-env STAGE=local nest start --watch",
     "start:dev": "cross-env STAGE=dev nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "cross-env STAGE=prod node dist/main",
@@ -26,7 +27,8 @@
     "migration:revert": "npm run typeorm -- migration:revert",
     "prepare": "husky install",
     "deploy:dev": "NODE_ENV=dev npm run build && NODE_ENV=dev serverless deploy",
-    "setup_serverless:dev": "NODE_ENV=dev serverless --org=pisanggoreng"
+    "setup_serverless:dev": "NODE_ENV=dev serverless --org=pisanggoreng",
+    "db:seed:local": "STAGE=local ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -52,10 +54,11 @@
     "mysql2": "^3.1.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "pg": "^8.9.0",
+    "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.12"
+    "typeorm": "^0.3.12",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
