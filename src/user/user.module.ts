@@ -7,9 +7,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { CommonModule } from 'src/common/common.module';
 import { UserRepo } from './user.repository';
+import { CategoryModule } from 'src/category/category.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), CommonModule],
+  imports: [TypeOrmModule.forFeature([User]), CommonModule, CategoryModule],
   controllers: [UserController],
   providers: [UserService, UserRepo, HandleError, UnitOfWorkFactory],
   exports: [UserService],

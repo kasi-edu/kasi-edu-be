@@ -31,6 +31,7 @@
     "db:seed:local": "STAGE=local ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "dependencies": {
+    "@nest-middlewares/cors": "^7.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",

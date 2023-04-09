@@ -44,22 +44,34 @@ export abstract class AbstractService {
     }
   }
 
-  async findAll({ conditions = {}, relations = {} }) {
+  async findAll({
+    conditions = {},
+    relations = {},
+    select = {},
+    page = 1,
+    take = 0,
+  }) {
     try {
       return {
         message: 'OK',
-        data: await this.repo.findAll({ conditions, relations }),
+        data: await this.repo.findAll({
+          conditions,
+          relations,
+          select,
+          page,
+          take,
+        }),
       };
     } catch (error) {
       this.handleError.throwError(error);
     }
   }
 
-  async findOne({ conditions = {}, relations = {} }) {
+  async findOne({ conditions = {}, relations = {}, select = {} }) {
     try {
       return {
         message: 'OK',
-        data: await this.repo.findOne({ conditions, relations }),
+        data: await this.repo.findOne({ conditions, relations, select }),
       };
     } catch (error) {
       this.handleError.throwError(error);

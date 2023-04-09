@@ -12,6 +12,7 @@ const categories: CreateCategoryDto[] = [
   { name: 'mechanik' },
   { name: 'kecantikan' },
   { name: 'memasak' },
+  { name: 'otomotif' },
 ];
 
 export default class InitialDatabaseSeed implements Seeder {

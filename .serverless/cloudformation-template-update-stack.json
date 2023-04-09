@@ -208,7 +208,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/kasi-edu/dev/1679924663432-2023-03-27T13:44:23.432Z/kasi-edu.zip"
+          "S3Key": "serverless/kasi-edu/dev/1681051109733-2023-04-09T14:38:29.733Z/kasi-edu.zip"
         },
         "Handler": "s_api.handler",
         "Runtime": "nodejs14.x",
@@ -242,14 +242,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionKLAm0cdIoCYGwAknSbdmP3qygndIKfdaXaDTraEM6o": {
+    "ApiLambdaVersionhf8vrTVq7dK7pZ8HdWGju274ix48B3R73E3tkcpqQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "3dLuz5kq6eB94DNNatc6kMstXi57ivJXAuTFYbkjZxY="
+        "CodeSha256": "95CQha3yyAxV5mojevj6PZGhmsHzbqiHF9Rr8WE63LY="
       }
     },
     "ApiGatewayRestApi": {
@@ -325,7 +325,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1679924632523": {
+    "ApiGatewayDeployment1681051076406": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -483,7 +483,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/kasi-edu/dev/1679924663432-2023-03-27T13:44:23.432Z/custom-resources.zip"
+          "S3Key": "serverless/kasi-edu/dev/1681051109733-2023-04-09T14:38:29.733Z/custom-resources.zip"
         },
         "FunctionName": "kasi-edu-dev-custom-resource-apigw-cw-role",
         "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -545,7 +545,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionKLAm0cdIoCYGwAknSbdmP3qygndIKfdaXaDTraEM6o"
+        "Ref": "ApiLambdaVersionhf8vrTVq7dK7pZ8HdWGju274ix48B3R73E3tkcpqQ"
       },
       "Export": {
         "Name": "sls-kasi-edu-dev-ApiLambdaFunctionQualifiedArn"

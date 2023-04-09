@@ -19,17 +19,36 @@ export abstract class AbstractRepository {
     return await this.repo.create(instanceDetails);
   }
 
-  async findAll({ conditions = {}, relations = {} }) {
-    return this.repo.find({
+  async findAll({
+    conditions = {},
+    relations = {},
+    select = {},
+    page = 1,
+    take = 0,
+  }) {
+    const [data, total] = await this.repo.findAndCount({
+      take,
+      skip: (page - 1) * take, // offset
       where: conditions ? conditions : undefined,
       relations: relations ? relations : undefined,
+      select: select ? select : undefined,
     });
+
+    return {
+      data,
+      meta: {
+        total,
+        page,
+        last_page: Math.ceil(total / take),
+      },
+    };
   }
 
-  async findOne({ conditions = {}, relations = {} }) {
+  async findOne({ conditions = {}, relations = {}, select = {} }) {
     return await this.repo.findOne({
       where: conditions ? conditions : undefined,
       relations: relations ? relations : undefined,
+      select: select ? select : undefined,
     });
   }
 

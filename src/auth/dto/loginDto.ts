@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { randEmail } from '@ngneat/falso';
 
 export class LoginDto {
-  @ApiProperty({ example: randEmail({ length: 10 }) })
+  @ApiProperty({ example: randEmail() })
   @IsNotEmpty()
   @IsEmail()
   @IsString()

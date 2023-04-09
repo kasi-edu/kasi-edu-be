@@ -29,10 +29,6 @@ export class AuthService {
         throw new BadRequestException('Email does not exist');
       }
 
-      if (userDetails.status === 'not verified') {
-        throw new BadRequestException('Account not verified');
-      }
-
       const hash = await bcrypt.hash(inputPassword, 8);
       const passwordMatches = bcrypt.compare(userDetails.password, hash);
 

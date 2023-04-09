@@ -7,6 +7,7 @@ import {
 } from '@ngneat/falso';
 import {
   IsEmail,
+  IsOptional,
   IsPhoneNumber,
   IsString,
   Matches,
@@ -15,11 +16,22 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @ApiProperty({ example: randEmail({ length: 10 }) })
+  @ApiProperty({
+    example: randEmail(),
+    description: 'Primary email for user & vocation register',
+  })
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 'Password12' })
+  @ApiProperty({
+    example: randEmail(),
+    description: 'Secondary email for vocation register',
+  })
+  @IsEmail()
+  @IsOptional()
+  vocationEmail: string;
+
+  @ApiProperty({ example: 'Password12', description: 'Password for register' })
   @IsString()
   @MinLength(4, { message: 'Password must be at least 4 characters' })
   @MaxLength(12, { message: 'Password to long' })
@@ -28,35 +40,60 @@ export class CreateUserDto {
   })
   password: string;
 
-  @ApiProperty({ example: 'vocation' })
+  @ApiProperty({
+    example: 'vocation',
+    description: 'a user type, is a normal user or vocation',
+  })
   @IsString()
   type: string;
 
-  @ApiProperty({ example: randFullAddress() })
+  @ApiProperty({
+    example: randFullAddress(),
+    description: 'a full address location for user & vocation',
+  })
   @IsString()
   address: string;
 
-  @ApiProperty({ example: 'kami vokasi yang bergerak dibidang otomotif' })
+  @ApiProperty({
+    example: 'kami vokasi yang bergerak dibidang otomotif',
+    description: 'A long description for tell about user & vocations',
+  })
   @IsString()
-  description?: string;
+  @IsOptional()
+  description: string;
 
-  @ApiProperty({ example: 'otomotif' })
+  @ApiProperty({
+    example: 'otomotif',
+    description: 'the category type for user & vocation',
+  })
   @IsString()
-  category?: string;
+  category: string;
 
-  @ApiProperty({ example: randFirstName() })
+  @ApiProperty({
+    example: randFirstName(),
+    description: 'A contact person for vocation',
+  })
   @IsString()
+  @IsOptional()
   contactPerson: string;
 
-  @ApiProperty({ example: randPhoneNumber({ length: 10 }) })
+  @ApiProperty({
+    example: randPhoneNumber(),
+    description: 'The primary phone number for user & vocation',
+  })
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })
   phoneOne: string;
 
-  @ApiProperty({ example: randPhoneNumber({ length: 10 }) })
+  @ApiProperty({
+    example: randPhoneNumber(),
+    description:
+      'The secondary phone number for user & vocation, this is optional',
+  })
   @IsPhoneNumber('ID', {
     message: 'Invalid phone number. Valid phone number sample +6247063644568',
   })
-  phoneTwo?: string;
+  @IsOptional()
+  phoneTwo: string;
 }

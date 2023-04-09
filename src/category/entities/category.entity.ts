@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,7 +14,7 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'otomotif' })
   @Column({ unique: true, nullable: true })
   name: string;
 
@@ -21,4 +23,7 @@ export class Category {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => User, (user) => user.category)
+  users: User[];
 }
