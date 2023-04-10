@@ -6,18 +6,15 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
   Query,
 } from '@nestjs/common';
 import {
-  ApiBearerAuth,
   ApiOperation,
   ApiParam,
   ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AccessTokenGuard } from 'src/common/guards/accessToken.guard';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import {
@@ -29,8 +26,6 @@ import {
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @ApiTags('Categories')
-@ApiBearerAuth('access-token')
-@UseGuards(AccessTokenGuard)
 @Controller('categories')
 export class CategoryController {
   selectedColumn: any;
