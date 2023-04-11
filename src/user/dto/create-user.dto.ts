@@ -31,6 +31,10 @@ export class CreateUserDto {
   @IsOptional()
   vocationEmail: string;
 
+  @IsString()
+  @IsOptional()
+  vocationName: string;
+
   @ApiProperty({ example: 'Password12', description: 'Password for register' })
   @IsString()
   @MinLength(4, { message: 'Password must be at least 4 characters' })
@@ -66,6 +70,7 @@ export class CreateUserDto {
     example: 'otomotif',
     description: 'the category type for user & vocation',
   })
+  @IsOptional()
   @IsString()
   category: string;
 

@@ -21,11 +21,15 @@ export class UserService extends AbstractService {
   }
 
   async findCategory(name: string) {
+    if (typeof name === 'undefined') {
+      return null;
+    }
+
     const { data: matchedCategory } = await this.categoryService.findOne({
       conditions: { name },
     });
 
-    if (!matchedCategory) {
+    if (typeof matchedCategory === 'undefined') {
       throw new BadRequestException('category not found');
     }
 
@@ -34,12 +38,13 @@ export class UserService extends AbstractService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const { category } = createUserDto;
+      const { category, type, vocationEmail, vocationName } = createUserDto;
       const matchedCategory = await this.findCategory(category);
 
       await this.userRepo.save({
         ...createUserDto,
         category: matchedCategory,
+        ...(matchedCategory !== null && { category: matchedCategory }),
       });
 
       return {

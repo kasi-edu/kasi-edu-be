@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 
 import { HandleError } from 'src/common/helpers/handleError';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/loginDto';
 
@@ -16,6 +17,24 @@ export class AuthService {
 
   hashData(data: string) {
     return bcrypt.hash(data, 8);
+  }
+
+  checkVocationMandatoryField(createUserDto: CreateUserDto) {
+    console.log({
+      vocationEmail: typeof createUserDto['vocationEmail'],
+      vocationName: typeof createUserDto['vocationName'],
+      category: typeof createUserDto['category'],
+    });
+
+    const checkField = ['vocationEmail', 'vocationName', 'category'].every(
+      (fieldName) => typeof createUserDto[fieldName] !== 'undefined',
+    );
+
+    if (!checkField) {
+      throw new BadRequestException(
+        'vocation need category / vocationName / vocationEmail',
+      );
+    }
   }
 
   async signIn(data: LoginDto) {
@@ -47,7 +66,12 @@ export class AuthService {
 
   async signUp(createUserDto): Promise<any> {
     try {
-      const { email, password } = createUserDto;
+      const { email, password, type } = createUserDto;
+
+      if (type === 'vocation') {
+        this.checkVocationMandatoryField(createUserDto);
+      }
+
       const { data: existingUserDetails } = await this.userService.findOne({
         conditions: { email },
       });

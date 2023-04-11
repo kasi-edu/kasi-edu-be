@@ -33,8 +33,19 @@ export class User {
     example: randEmail(),
     description: 'Secondary email for vocation register',
   })
-  @Column({ unique: true, nullable: true, default: null })
+  @Column({
+    unique: true,
+    nullable: true,
+    default: null,
+  })
   vocationEmail: string;
+
+  @Column({
+    unique: true,
+    nullable: true,
+    default: null,
+  })
+  vocationName: string;
 
   @ApiProperty({
     example: randPassword(),
