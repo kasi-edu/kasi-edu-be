@@ -208,7 +208,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/kasi-edu/dev/1681223807234-2023-04-11T14:36:47.234Z/kasi-edu.zip"
+          "S3Key": "serverless/kasi-edu/dev/1681746732028-2023-04-17T15:52:12.028Z/kasi-edu.zip"
         },
         "Handler": "s_api.handler",
         "Runtime": "nodejs14.x",
@@ -242,14 +242,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionSuX8vnQ79jKGRJGJ6u9zd3yIwjL0Ge4ZkKGdrCf8": {
+    "ApiLambdaVersionIvyphRz3YARLZpBoh3cYnvdOBKbmmZN1zz201jKgQs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "ZMTn7WVrRPXx4D+SEttdkDJ13itwQzMB1Y0oxJ59v5Y="
+        "CodeSha256": "m+SyIRu5GexpU7MRkdEQCAkC2Op93IKLvEAMP9GGulU="
       }
     },
     "ApiGatewayRestApi": {
@@ -325,7 +325,7 @@
         "ApiLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1681223773881": {
+    "ApiGatewayDeployment1681746698470": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -483,7 +483,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/kasi-edu/dev/1681223807234-2023-04-11T14:36:47.234Z/custom-resources.zip"
+          "S3Key": "serverless/kasi-edu/dev/1681746732028-2023-04-17T15:52:12.028Z/custom-resources.zip"
         },
         "FunctionName": "kasi-edu-dev-custom-resource-apigw-cw-role",
         "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -545,7 +545,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionSuX8vnQ79jKGRJGJ6u9zd3yIwjL0Ge4ZkKGdrCf8"
+        "Ref": "ApiLambdaVersionIvyphRz3YARLZpBoh3cYnvdOBKbmmZN1zz201jKgQs"
       },
       "Export": {
         "Name": "sls-kasi-edu-dev-ApiLambdaFunctionQualifiedArn"

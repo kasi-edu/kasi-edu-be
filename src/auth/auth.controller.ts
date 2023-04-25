@@ -15,6 +15,7 @@ import {
   ApiExtraModels,
   refs,
 } from '@nestjs/swagger';
+import { User } from 'src/user/entities/user.entity';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/loginDto';
 import { ResponseSignInDto } from './dto/response.dto';
@@ -26,8 +27,7 @@ export class AuthController {
 
   @Post('signup')
   @ApiOperation({ summary: 'Create a new user for normal user & vocation' })
-  @ApiExtraModels(LoginDto)
-  @ApiOkResponse({ schema: { anyOf: refs(LoginDto) } })
+  @ApiOkResponse({ schema: { anyOf: refs(User) } })
   @ApiResponse({
     status: 400,
     schema: {
@@ -41,21 +41,11 @@ export class AuthController {
           },
         },
         {
-          title: 'Password is incorrect',
-          description: `The supplier couldn't be found in our system, please verify and try again.`,
+          title: 'vocation need category / vocationName / vocationEmail',
           example: {
             statusCode: 400,
             error: 'Bad Request',
-            message: 'Account not verified',
-          },
-        },
-        {
-          title: 'Password is incorrect',
-          description: `The information provided couldn't be found in the part numbers master, please verify and try again.`,
-          example: {
-            statusCode: 400,
-            error: 'Bad Request',
-            message: 'Password is incorrect',
+            message: 'vocation need category / vocationName / vocationEmail',
           },
         },
       ],

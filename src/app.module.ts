@@ -7,6 +7,9 @@ import { dataSourceOptions } from '../db/data-source';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
+import { ClassModule } from './class/class.module';
+import { DescriptionModule } from './description/description.module';
+import { RequirementModule } from './requirement/requirement.module';
 
 @Module({
   imports: [
@@ -18,6 +21,9 @@ import { CategoryModule } from './category/category.module';
     UserModule,
     AuthModule,
     CategoryModule,
+    ClassModule,
+    DescriptionModule,
+    RequirementModule,
   ],
 })
 export class AppModule {

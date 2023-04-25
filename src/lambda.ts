@@ -10,9 +10,9 @@ let cachedServer;
 
 async function setupSwagger(app) {
   const options = new DocumentBuilder()
-    .setTitle('CV Dashboard API')
+    .setTitle('Kasi Edu API')
     .setVersion('v1')
-    .addTag('CvDashboard')
+    .addTag('Kasi Edu')
     .addServer('/dev')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },

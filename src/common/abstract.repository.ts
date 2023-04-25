@@ -7,10 +7,7 @@ export abstract class AbstractRepository {
   connectionDb: any;
   handleError: HandleError;
 
-  constructor(
-    protected readonly repo: Repository<any>,
-    connection: Connection,
-  ) {
+  constructor(protected readonly repo: Repository<any>, connection: Connection) {
     this.connectionDb = connection.createQueryRunner();
     this.handleError = new HandleError();
   }
@@ -19,29 +16,14 @@ export abstract class AbstractRepository {
     return await this.repo.create(instanceDetails);
   }
 
-  async findAll({
-    conditions = {},
-    relations = {},
-    select = {},
-    page = 1,
-    take = 0,
-  }) {
-    const [data, total] = await this.repo.findAndCount({
+  findAll({ conditions = {}, relations = {}, select = {}, page = 1, take = 0 }) {
+    return this.repo.findAndCount({
       take,
       skip: (page - 1) * take, // offset
       where: conditions ? conditions : undefined,
       relations: relations ? relations : undefined,
       select: select ? select : undefined,
     });
-
-    return {
-      data,
-      meta: {
-        total,
-        page,
-        last_page: Math.ceil(total / take),
-      },
-    };
   }
 
   async findOne({ conditions = {}, relations = {}, select = {} }) {

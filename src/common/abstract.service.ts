@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { PageMetaDto } from './dto/page-meta.dto';
+import { PageDto } from './dto/page.dto';
 import { HandleError } from './helpers/handleError';
 
 @Injectable()
@@ -44,24 +46,22 @@ export abstract class AbstractService {
     }
   }
 
-  async findAll({
-    conditions = {},
-    relations = {},
-    select = {},
-    page = 1,
-    take = 0,
-  }) {
+  async findAll({ conditions = {}, relations = {}, select = {}, page = 1, take = 0 }) {
     try {
-      return {
-        message: 'OK',
-        data: await this.repo.findAll({
-          conditions,
-          relations,
-          select,
-          page,
-          take,
-        }),
-      };
+      const [data, itemCount] = await this.repo.findAll({
+        take,
+        page,
+        relations,
+        select,
+        conditions,
+      });
+
+      const pageMetaDto = new PageMetaDto({
+        itemCount,
+        pageOptionsDto: { page, take },
+      });
+
+      return new PageDto(data, pageMetaDto);
     } catch (error) {
       this.handleError.throwError(error);
     }

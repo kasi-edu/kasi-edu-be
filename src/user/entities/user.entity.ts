@@ -4,6 +4,7 @@ import {
   randFullName,
   randPassword,
   randPhoneNumber,
+  randStreetAddress,
 } from '@ngneat/falso';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
@@ -31,7 +32,8 @@ export class User {
 
   @ApiProperty({
     example: randEmail(),
-    description: 'Secondary email for vocation register',
+    description:
+      'Secondary email for vocation register, this mandatory for vocation!',
   })
   @Column({
     unique: true,
@@ -40,6 +42,10 @@ export class User {
   })
   vocationEmail: string;
 
+  @ApiProperty({
+    example: 'Bootcamp 78',
+    description: 'Vocation name, this mandatory for vocation!',
+  })
   @Column({
     unique: true,
     nullable: true,
@@ -56,8 +62,9 @@ export class User {
   password: string;
 
   @ApiProperty({
-    example: ['vocation', 'company', 'user'],
-    description: 'a user type, is a normal user or vocation',
+    example: 'vocation',
+    description:
+      'a user type, is a normal user or vocation => ["vocation", "company", "user"]',
   })
   @Column({
     type: 'enum',
@@ -67,7 +74,7 @@ export class User {
   type: string;
 
   @ApiProperty({
-    example: randAddress(),
+    example: randStreetAddress(),
     description: 'a full address location for user & vocation',
   })
   @Column({ nullable: false })
@@ -113,6 +120,10 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @ApiProperty({
+    example: 'memasak',
+    description: 'The category name, this mandatory for vocation!',
+  })
   @ManyToOne(() => Category, (category) => category.users, {
     onDelete: 'CASCADE',
   })
